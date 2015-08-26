@@ -1,23 +1,27 @@
 <div class="container">
-  <h1>Welcome to Sinatra!</h1>
-  <p>Hello, world!</p>
+  <h1>URL Shortener</h1>
+  <p>Give us a URL you'd like to shorten:</p>
 
-  <table>
-    <tr>
-      <th>File Description</th>
-      <th>File Location</th>
-    </tr>
-    <tr>
-      <td>This view file</td>
-      <td><code><%= __FILE__.gsub(Sinatra::Application.root, '') %></code></td>
-    </tr>
-    <tr>
-      <td>The layout file</td>
-      <td><code><%= File.expand_path('../layout.erb', __FILE__).gsub(Sinatra::Application.root, '') %></code></td>
-    </tr>
-    <tr>
-      <td>The current controller</td>
-      <td><code><%= File.expand_path('../../controllers/index.rb', __FILE__).gsub(Sinatra::Application.root, '') %></code></td>
-    </tr>
-  </table>
+  <form action="/urls" method="post">
+  <p><b>Your URL : </b><input type="text" name="url"></p>
+  <p><input type="submit" value="Short it!"></p>
+  </form>
+
+  <h3>Current Shortened Url</h3>
+  
+    <table border=1>
+      <tr>
+        <th>Url</th>
+        <th>Short Url</th>
+        <th>Click count</th>
+       </tr>
+        <% @shorturl.each do |url|%>
+        <tr>
+        <td><%= url.ori_url%></td>
+        <td><a href = "<%= url.short_url%>"><%=url.short_url%></td>
+        <td><%= url.click_count%></td>
+       </tr>
+         <% end %>
+    </table>
+
 </div>
